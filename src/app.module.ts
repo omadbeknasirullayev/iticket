@@ -19,6 +19,10 @@ import { District } from './district/entities/district.entity';
 import { VenueTypeModule } from './venue_type/venue_type.module';
 import { VenueType } from './venue_type/entities/venue_type.entity';
 import { Venue } from './venue/entities/venue.entity';
+import { SeatTypeModule } from './seat_type/seat_type.module';
+import { SeatType } from './seat_type/entities/seat_type.entity';
+import { SeatModule } from './seat/seat.module';
+import { Seat } from './seat/entities/seat.entity';
 
 @Module({
   imports: [
@@ -42,7 +46,9 @@ import { Venue } from './venue/entities/venue.entity';
         Region,
         District,
         VenueType,
-        // Venue,
+        Venue,
+        SeatType,
+        Seat,
       ],
       autoLoadModels: true,
       logging: false,
@@ -56,6 +62,8 @@ import { Venue } from './venue/entities/venue.entity';
     RegionModule,
     DistrictModule,
     VenueTypeModule,
+    SeatTypeModule,
+    SeatModule,
   ],
   controllers: [],
   providers: [],
