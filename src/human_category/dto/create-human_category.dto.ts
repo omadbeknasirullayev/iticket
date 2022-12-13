@@ -5,7 +5,11 @@ export class CreateHumanCategoryDto {
     name: string
 
     @IsNumber({}, {message: "Human_Category's start_age must be number"})
-    start_age
+    start_age: number
 
-    
+    @IsNumber({}, {message: "Human_Category's finish_age must be number"})
+    finish_age: number
+
+    @IsNumber({}, {message: "Human_Category's gender must be number"})
+    gender: number 
 }

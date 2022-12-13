@@ -7,7 +7,7 @@ interface CreateHumanCategoryAttr {
 @Table({tableName: 'human_categories'})
 export class HumanCategory extends Model<HumanCategory, CreateHumanCategoryAttr> {
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.BIGINT,
         unique: true,
         autoIncrement: true,
         primaryKey: true,
