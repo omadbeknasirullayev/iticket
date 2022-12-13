@@ -16,13 +16,13 @@ export class RegionService {
 
   // findAll
   async findAll() {
-    const regions = await this.regionRepository.findAll()
+    const regions = await this.regionRepository.findAll({include: {all: true}})
     return regions
   }
 
   //FindOne
   async findOne(id: number) {
-    const region = await this.regionRepository.findOne({where: {id}})    
+    const region = await this.regionRepository.findOne({where: {id}, include: {all: true}})    
     if (!region) {
       throw new NotFoundException('No such region exists');
     }
