@@ -1,5 +1,6 @@
 
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Gender } from "src/gender/entities/gender.entity";
 import { Language } from "src/languages/entities/language.entity";
 
 interface CreateCustomerAttr {
@@ -47,6 +48,7 @@ export class Customer extends Model<Customer, CreateCustomerAttr> {
     })
     email: string
 
+    @ForeignKey(() => Gender)
     @Column({
         type: DataType.SMALLINT
     })
@@ -65,4 +67,7 @@ export class Customer extends Model<Customer, CreateCustomerAttr> {
 
     @BelongsTo(() => Language)
     language: Language
+
+    @BelongsTo(() => Gender)
+    gender_type: Gender
 }
