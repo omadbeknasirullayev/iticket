@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { District } from "src/district/entities/district.entity";
 
 @Table({tableName: 'regions', timestamps: false})
 
@@ -16,4 +17,7 @@ export class Region extends Model<Region> {
         unique: true,
     })
     name: string
+
+    @HasMany(() => District)
+    districts: District[]
 }
