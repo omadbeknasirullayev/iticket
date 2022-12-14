@@ -18,7 +18,7 @@ import { Event } from './entities/event.entity';
       Venue,
       Language,
     ]),
-    FilesModule
+    FilesModule,
   ],
   controllers: [EventController],
   providers: [EventService],
