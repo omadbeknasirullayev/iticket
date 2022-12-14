@@ -22,4 +22,17 @@ export class FilesService {
             )
         }
     }
+
+    async removeFile(fileName: string) {
+        try {
+            const filePath = path.resolve(__dirname, '..', 'static')
+            fs.unlinkSync(path.join(filePath, fileName))
+            return 0
+        } catch (error) {
+            throw new HttpException (
+                "Faylni o'chirishda xatolik",
+                HttpStatus.INTERNAL_SERVER_ERROR
+            ) 
+        }
+    }
 }
