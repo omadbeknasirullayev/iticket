@@ -1,5 +1,6 @@
 
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Card } from "src/card/entities/card.entity";
 import { Gender } from "src/gender/entities/gender.entity";
 import { Language } from "src/languages/entities/language.entity";
 
@@ -20,7 +21,8 @@ export class Customer extends Model<Customer, CreateCustomerAttr> {
         autoIncrement: true,
         primaryKey: true
     })
-
+    id: number
+    
     @Column({
         type: DataType.STRING,
     })
@@ -70,4 +72,7 @@ export class Customer extends Model<Customer, CreateCustomerAttr> {
 
     @BelongsTo(() => Gender)
     gender_type: Gender
+
+    @HasMany(() => Card)
+    card: Card
 }
