@@ -4,7 +4,7 @@ export class CreateEventDto {
     start_time: string
     finish_date: Date
     finish_time: string
-    info: Text
+    info: string
     event_type_id: number
     human_category_id: number
     venue_id: number

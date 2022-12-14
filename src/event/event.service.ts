@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { FilesService } from 'src/files/files.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -18,22 +18,59 @@ export class EventService {
       ...createEventDto,
       photo: fileName,
     });
-    return newEvent;
+    return { message: 'Successfully added', info: newEvent };
   }
 
-  findAll() {
-    return `This action returns all event`;
+  async findAll() {
+    const event = await this.eventRepository.findAll({
+      include: { all: true },
+    });
+    return event;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  async findOne(id: number) {
+    const event = await this.eventRepository.findOne({ where: { id } });
+    if (!event) {
+      throw new NotFoundException('No such event exists');
+    }
+    return event;
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto, photo: any) {
+    const event = await this.eventRepository.findOne({ where: { id } });
+    if (!event) {
+      throw new NotFoundException('No such event exists');
+    }
+    console.log(photo);
+    if (photo) {
+      await this.fileService.removeFile(event.photo);
+      const fileName = await this.fileService.createFile(photo);
+      const newEvent = await this.eventRepository.update(
+        {
+          ...updateEventDto,
+          photo: fileName,
+        },
+        { where: { id }, returning: true },
+      );
+      return { message: 'Successfully updated', info: newEvent };
+    }
+    const newEvent = await this.eventRepository.update(updateEventDto, {
+      where: { id },
+      returning: true,
+    });
+
+    return { message: 'Successfully updated', info: newEvent };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  async remove(id: number) {
+    const event = await this.eventRepository.findOne({ where: { id } });
+    if (!event) {
+      throw new NotFoundException('No such event exists');
+    }
+    if (event.photo) 
+      await this.fileService.removeFile(event.photo);
+    const deleted = await this.eventRepository.destroy({ where: { id } });
+
+    return { message: 'Successfully removed', count: deleted };
   }
 }

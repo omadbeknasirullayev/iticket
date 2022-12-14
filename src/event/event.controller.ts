@@ -25,8 +25,9 @@ export class EventController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventService.update(+id, updateEventDto);
+  @UseInterceptors(FileInterceptor('photo'))
+  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto, @UploadedFile() photo) {
+    return this.eventService.update(+id, updateEventDto, photo);
   }
 
   @Delete(':id')

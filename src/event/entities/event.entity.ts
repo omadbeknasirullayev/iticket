@@ -50,9 +50,9 @@ export class Event extends Model<Event> {
     finish_time: string
 
     @Column({
-        type: DataType.TEXT
+        type: DataType.STRING
     })
-    info: Text
+    info: string
 
     @ForeignKey(() => EventType)
     @Column({
