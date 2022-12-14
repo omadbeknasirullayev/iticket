@@ -1,4 +1,4 @@
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { EventType } from "src/event_type/entities/event_type.entity";
 import { HumanCategory } from "src/human_category/entities/human_category.entity";
 import { Language } from "src/languages/entities/language.entity";
@@ -61,12 +61,18 @@ export class Event extends Model<Event> {
     })
     event_type_id: number
 
+    @BelongsTo(() => EventType)
+    event_type: EventType
+
     @ForeignKey(() => HumanCategory)
     @Column({
         type: DataType.BIGINT,
         allowNull: false
     })
     human_category_id: number
+
+    @BelongsTo(() => HumanCategory)
+    human_category: HumanCategory
 
     @ForeignKey(() => Venue)
     @Column({
@@ -75,6 +81,9 @@ export class Event extends Model<Event> {
     })
     venue_id: number
 
+    @BelongsTo(() => Venue)
+    vanue: Venue
+
     @ForeignKey(() => Language)
     @Column({
         type: DataType.SMALLINT,
@@ -82,6 +91,9 @@ export class Event extends Model<Event> {
     })
     lang_id: number
 
+    @BelongsTo(() => Language)
+    language: Language
+    
     @Column({
         type: DataType.DATE
     })
