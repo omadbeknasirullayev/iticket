@@ -23,6 +23,8 @@ import { SeatTypeModule } from './seat_type/seat_type.module';
 import { SeatType } from './seat_type/entities/seat_type.entity';
 import { SeatModule } from './seat/seat.module';
 import { Seat } from './seat/entities/seat.entity';
+import { EventModule } from './event/event.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -64,6 +66,8 @@ import { Seat } from './seat/entities/seat.entity';
     VenueTypeModule,
     SeatTypeModule,
     SeatModule,
+    EventModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],
