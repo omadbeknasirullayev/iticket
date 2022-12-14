@@ -26,6 +26,11 @@ import { Seat } from './seat/entities/seat.entity';
 import { EventModule } from './event/event.module';
 import { FilesModule } from './files/files.module';
 import { Event } from './event/entities/event.entity';
+import { TicketModule } from './ticket/ticket.module';
+import { StatusModule } from './status/status.module';
+import { Status } from './status/entities/status.entity';
+import { TicketTypeModule } from './ticket_type/ticket_type.module';
+import { TicketType } from './ticket_type/entities/ticket_type.entity';
 
 @Module({
   imports: [
@@ -53,6 +58,8 @@ import { Event } from './event/entities/event.entity';
         SeatType,
         Seat,
         Event,
+        Status,
+        TicketType,
       ],
       autoLoadModels: true,
       logging: false,
@@ -70,6 +77,9 @@ import { Event } from './event/entities/event.entity';
     SeatModule,
     EventModule,
     FilesModule,
+    TicketModule,
+    StatusModule,
+    TicketTypeModule,
   ],
   controllers: [],
   providers: [],
