@@ -29,7 +29,10 @@ export class EventService {
   }
 
   async findOne(id: number) {
-    const event = await this.eventRepository.findOne({ where: { id } });
+    const event = await this.eventRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
     if (!event) {
       throw new NotFoundException('No such event exists');
     }
@@ -67,8 +70,7 @@ export class EventService {
     if (!event) {
       throw new NotFoundException('No such event exists');
     }
-    if (event.photo) 
-      await this.fileService.removeFile(event.photo);
+    if (event.photo) await this.fileService.removeFile(event.photo);
     const deleted = await this.eventRepository.destroy({ where: { id } });
 
     return { message: 'Successfully removed', count: deleted };
