@@ -25,6 +25,7 @@ import { SeatModule } from './seat/seat.module';
 import { Seat } from './seat/entities/seat.entity';
 import { EventModule } from './event/event.module';
 import { FilesModule } from './files/files.module';
+import { Event } from './event/entities/event.entity';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { FilesModule } from './files/files.module';
         Venue,
         SeatType,
         Seat,
+        Event,
       ],
       autoLoadModels: true,
       logging: false,
