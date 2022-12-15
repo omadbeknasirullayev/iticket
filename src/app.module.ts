@@ -31,6 +31,15 @@ import { StatusModule } from './status/status.module';
 import { Status } from './status/entities/status.entity';
 import { TicketTypeModule } from './ticket_type/ticket_type.module';
 import { TicketType } from './ticket_type/entities/ticket_type.entity';
+import { Ticket } from './ticket/entities/ticket.entity';
+import { CardModule } from './card/card.module';
+import { Card } from './card/entities/card.entity';
+import { PaymentMethodModule } from './payment_method/payment_method.module';
+import { PaymentMethod } from './payment_method/entities/payment_method.entity';
+import { DeliveryMethodModule } from './delivery_method/delivery_method.module';
+import { DeliveryMethod } from './delivery_method/entities/delivery_method.entity';
+import { DiscountCuponModule } from './discount_cupon/discount_cupon.module';
+import { DiscountCupon } from './discount_cupon/entities/discount_cupon.entity';
 
 @Module({
   imports: [
@@ -60,6 +69,11 @@ import { TicketType } from './ticket_type/entities/ticket_type.entity';
         Event,
         Status,
         TicketType,
+        Ticket,
+        Card,
+        PaymentMethod,
+        DeliveryMethod,
+        DiscountCupon,
       ],
       autoLoadModels: true,
       logging: false,
@@ -80,6 +94,10 @@ import { TicketType } from './ticket_type/entities/ticket_type.entity';
     TicketModule,
     StatusModule,
     TicketTypeModule,
+    CardModule,
+    PaymentMethodModule,
+    DeliveryMethodModule,
+    DiscountCuponModule,
   ],
   controllers: [],
   providers: [],
