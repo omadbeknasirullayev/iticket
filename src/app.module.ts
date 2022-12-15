@@ -40,6 +40,7 @@ import { DeliveryMethodModule } from './delivery_method/delivery_method.module';
 import { DeliveryMethod } from './delivery_method/entities/delivery_method.entity';
 import { DiscountCuponModule } from './discount_cupon/discount_cupon.module';
 import { DiscountCupon } from './discount_cupon/entities/discount_cupon.entity';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -98,6 +99,7 @@ import { DiscountCupon } from './discount_cupon/entities/discount_cupon.entity';
     PaymentMethodModule,
     DeliveryMethodModule,
     DiscountCuponModule,
+    BookingModule,
   ],
   controllers: [],
   providers: [],
