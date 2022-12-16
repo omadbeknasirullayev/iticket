@@ -6,9 +6,10 @@ import { Venue } from './entities/venue.entity';
 import { VenueType } from 'src/venue_type/entities/venue_type.entity';
 import { Region } from 'src/region/entities/region.entity';
 import { District } from 'src/district/entities/district.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Venue, VenueType, Region, District])],
+  imports: [SequelizeModule.forFeature([Venue, VenueType, Region, District]), JwtModule],
   controllers: [VenueController],
   providers: [VenueService],
   exports: [VenueService]

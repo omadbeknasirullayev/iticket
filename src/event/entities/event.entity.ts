@@ -82,7 +82,7 @@ export class Event extends Model<Event> {
     venue_id: number
 
     @BelongsTo(() => Venue)
-    vanue: Venue
+    venue: Venue
 
     @ForeignKey(() => Language)
     @Column({

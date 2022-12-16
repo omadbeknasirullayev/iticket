@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { VenueService } from './venue.service';
 import { CreateVenueDto } from './dto/create-venue.dto';
 import { UpdateVenueDto } from './dto/update-venue.dto';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
 
 @Controller('venue')
 export class VenueController {
@@ -12,11 +13,13 @@ export class VenueController {
     return this.venueService.create(createVenueDto);
   }
 
+  @UseGuards(JwtAdminGuard)
   @Get()
   findAll() {
     return this.venueService.findAll();
   }
 
+  @UseGuards(JwtAdminGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.venueService.findOne(+id);

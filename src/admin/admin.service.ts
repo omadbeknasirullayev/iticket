@@ -42,7 +42,6 @@ export class AdminService {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
-
     return tokens;
   }
 
@@ -157,8 +156,23 @@ export class AdminService {
     if (!admin) {
       throw new NotFoundException('No such admin exists');
     }
+    if (admin.is_active == true) {
+      return {message: "Admin alraedy active"}
+    }
     await this.adminRepository.update({is_active: true}, {where: {id}})
     return {message: "Successfully acivated"}
+  }
+
+  async deActivate(id: number) {
+    const admin = await this.adminRepository.findOne({where: {id}})
+    if (!admin) {
+      throw new NotFoundException('No such admin exists');
+    }
+    if (admin.is_active == false) {
+      return {message: "Admin alraedy inactive"}
+    }
+    await this.adminRepository.update({is_active: false}, {where: {id}})
+    return {message: "Successfully inacivated"}
   }
 
   async findAll() {

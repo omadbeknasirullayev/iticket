@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 import { DistrictService } from './district.service';
 import { CreateDistrictDto } from './dto/create-district.dto';
 import { UpdateDistrictDto } from './dto/update-district.dto';
@@ -12,11 +13,13 @@ export class DistrictController {
     return this.districtService.create(createDistrictDto);
   }
 
+  @UseGuards(JwtAdminCustomerGuard)
   @Get()
   findAll() {
     return this.districtService.findAll();
   }
 
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.districtService.findOne(+id);

@@ -13,12 +13,7 @@ export class CustomersService {
   ) {}
 
   async create(createCustomerDto: CreateCustomerDto) {
-    const hashpassword = bcrytjs.hash(createCustomerDto.hashed_password, 7);
-
-    createCustomerDto = {
-      hashed_password: hashpassword,
-      ...createCustomerDto,
-    };
+    
     const customer = await this.customerRapository.create(createCustomerDto);
     return { message: 'Successfully added, info: customer' };
   }

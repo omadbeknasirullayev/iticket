@@ -1,4 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Card } from "src/card/entities/card.entity";
 import { DeliveryMethod } from "src/delivery_method/entities/delivery_method.entity";
 import { DiscountCupon } from "src/discount_cupon/entities/discount_cupon.entity";
 import { PaymentMethod } from "src/payment_method/entities/payment_method.entity";
@@ -12,6 +13,12 @@ export class Booking extends Model<Booking> {
         primaryKey: true
     })
     id: number
+
+    @ForeignKey(() => Card)
+    @Column({
+        type: DataType.BIGINT
+    })
+    card_id: number
 
     @Column({
         type: DataType.DATE,
@@ -42,6 +49,9 @@ export class Booking extends Model<Booking> {
         type: DataType.BIGINT
     })
     discount_cupon_id: number
+
+    @BelongsTo(() => Card)
+    card: Card
 
     @BelongsTo(() => PaymentMethod)
     payment: PaymentMethod

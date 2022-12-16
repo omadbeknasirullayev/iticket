@@ -21,5 +21,5 @@ export class EventType extends Model<EventType> {
     @Column({
         type: DataType.SMALLINT
     })
-    parent_event_type_id
+    parent_event_type_id: number
 }

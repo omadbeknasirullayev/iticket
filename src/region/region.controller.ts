@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { RegionService } from './region.service';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 
 @Controller('region')
 export class RegionController {
@@ -17,6 +18,7 @@ export class RegionController {
     return this.regionService.findAll();
   }
 
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.regionService.findOne(+id);

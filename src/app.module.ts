@@ -41,6 +41,17 @@ import { DeliveryMethod } from './delivery_method/entities/delivery_method.entit
 import { DiscountCuponModule } from './discount_cupon/discount_cupon.module';
 import { DiscountCupon } from './discount_cupon/entities/discount_cupon.entity';
 import { BookingModule } from './booking/booking.module';
+import { CustomerCardModule } from './customer_card/customer_card.module';
+import { CustomerCard } from './customer_card/entities/customer_card.entity';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
+import { Admin } from './admin/entities/admin.entity';
+import { CustomerAdressModule } from './customer_adress/customer_adress.module';
+import { CountryModule } from './country/country.module';
+import { CustomerAdress } from './customer_adress/entities/customer_adress.entity';
+import { Country } from './country/entities/country.entity';
+import { VenuePhotoModule } from './venue_photo/venue_photo.module';
+import { VenuePhoto } from './venue_photo/entities/venue_photo.entity';
 
 @Module({
   imports: [
@@ -75,6 +86,11 @@ import { BookingModule } from './booking/booking.module';
         PaymentMethod,
         DeliveryMethod,
         DiscountCupon,
+        CustomerCard,
+        Admin,
+        CustomerAdress,
+        Country,
+        VenuePhoto,
       ],
       autoLoadModels: true,
       logging: false,
@@ -100,6 +116,12 @@ import { BookingModule } from './booking/booking.module';
     DeliveryMethodModule,
     DiscountCuponModule,
     BookingModule,
+    CustomerCardModule,
+    AuthModule,
+    AdminModule,
+    CustomerAdressModule,
+    CountryModule,
+    VenuePhotoModule,
   ],
   controllers: [],
   providers: [],

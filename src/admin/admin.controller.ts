@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAdminGuard } from 'src/guards/admin.guard';
+import { JwtCreatorGuard } from 'src/guards/creator.guard';
 import { AdminService } from './admin.service';
 import { AdminDto } from './dto/admin.dto';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -30,9 +31,15 @@ export class AdminController {
     return await this.adminService.signin(adminDto, res);
   }
 
-  @UseGuards(JwtAdminGuard)
+  @UseGuards(JwtCreatorGuard)
   @Post('activate/:id')
-  create(@Param('id') id: string) {
+  activate(@Param('id') id: string) {
+    return this.adminService.activate(+id);
+  }
+
+  @UseGuards(JwtAdminGuard)
+  @Post('inactivate/:id')
+  inactivate(@Param('id') id: string) {
     return this.adminService.activate(+id);
   }
 

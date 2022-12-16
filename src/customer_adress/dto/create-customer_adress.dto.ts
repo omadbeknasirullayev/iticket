@@ -1,4 +1,7 @@
+import { IsNotEmpty } from "class-validator"
+
 export class CreateCustomerAdressDto {
+    @IsNotEmpty({message: "cannot be empty"})
     readonly customer_id: number
     readonly name: string
     readonly country_id: number
