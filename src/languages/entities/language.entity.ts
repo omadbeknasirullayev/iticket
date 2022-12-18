@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 interface CreateLanguageAttr {
@@ -6,6 +7,8 @@ interface CreateLanguageAttr {
 
 @Table({ tableName: 'languages' })
 export class Language extends Model<Language, CreateLanguageAttr> {
+
+  @ApiProperty({example: 1, description: "Unical ID"})
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -14,6 +17,7 @@ export class Language extends Model<Language, CreateLanguageAttr> {
   })
   id: number
   
+  @ApiProperty({example: "English", description: "Language name"})
   @Column({
     type: DataType.STRING,
     unique: true,

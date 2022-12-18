@@ -1,8 +1,10 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 @Table({tableName: 'event_type', timestamps: false})
 
 export class EventType extends Model<EventType> {
+    @ApiProperty({example: 1, description: "Unical ID"})
     @Column({
         type: DataType.SMALLINT,
         unique: true,
@@ -10,7 +12,8 @@ export class EventType extends Model<EventType> {
         primaryKey: true
     })
     id: number
-
+    
+    @ApiProperty({example: "Comedy", description: "Event type name"})
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -18,6 +21,7 @@ export class EventType extends Model<EventType> {
     })
     name: string
 
+    @ApiProperty({example: 1, description: "Parent event type id, connction with self"})
     @Column({
         type: DataType.SMALLINT
     })

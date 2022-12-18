@@ -3,7 +3,9 @@ import { VenueService } from './venue.service';
 import { CreateVenueDto } from './dto/create-venue.dto';
 import { UpdateVenueDto } from './dto/update-venue.dto';
 import { JwtAdminGuard } from 'src/guards/admin.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Venue')
 @Controller('venue')
 export class VenueController {
   constructor(private readonly venueService: VenueService) {}

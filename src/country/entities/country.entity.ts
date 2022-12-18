@@ -7,7 +7,7 @@ import { CustomerAdress } from "src/customer_adress/entities/customer_adress.ent
 
 export class Country extends Model<Country> {
 
-    @ApiProperty({example:'1',description:'Unique Id'})
+    @ApiProperty({example:'1',description:'Unical ID'})
     @Column({
         type:DataType.INTEGER,
         unique:true,
@@ -16,7 +16,7 @@ export class Country extends Model<Country> {
     })
     id:number
 
-    @ApiProperty({example:'Estonia',description:'name of country'})
+    @ApiProperty({example:'Estonia',description:'Country name'})
     @Column({
         type:DataType.STRING,
         allowNull:false

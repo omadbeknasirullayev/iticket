@@ -7,6 +7,7 @@ interface CreateVenueAttr {
     name: string
 }
 
+
 @Table({tableName: 'venues'})
 export class Venue extends Model<Venue, CreateVenueAttr> {
     @Column({
