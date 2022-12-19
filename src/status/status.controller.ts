@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { StatusService } from './status.service';
 import { CreateStatusDto } from './dto/create-status.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Status } from './entities/status.entity';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
 
 @ApiTags('Status')
 @Controller('status')
@@ -13,6 +14,7 @@ export class StatusController {
 
   @ApiOperation({ summary: 'Status name' })
   @ApiResponse({ status: 200, type: Status })
+  @UseGuards(JwtAdminGuard)
   @Post()
   create(@Body() createStatusDto: CreateStatusDto) {
     return this.statusService.create(createStatusDto);
@@ -34,6 +36,7 @@ export class StatusController {
 
   @ApiOperation({ summary: 'Updadate status' })
   @ApiResponse({ status: 200, type: Status })
+  @UseGuards(JwtAdminGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
     return this.statusService.update(+id, updateStatusDto);
@@ -41,6 +44,7 @@ export class StatusController {
 
   @ApiOperation({ summary: 'remove status' })
   @ApiResponse({ status: 200, type: Status })
+  @UseGuards(JwtAdminGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.statusService.remove(+id);

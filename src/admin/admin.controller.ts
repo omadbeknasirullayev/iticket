@@ -39,12 +39,13 @@ export class AdminController {
     return this.adminService.activate(+id);
   }
 
-  @UseGuards(JwtAdminGuard)
+  @UseGuards(JwtCreatorGuard)
   @Post('inactivate/:id')
   inactivate(@Param('id') id: string) {
     return this.adminService.activate(+id);
   }
 
+  @UseGuards(JwtCreatorGuard)
   @Get()
   findAll() {
     return this.adminService.findAll();

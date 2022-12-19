@@ -8,6 +8,7 @@ import { Venue } from 'src/venue/entities/venue.entity';
 import { Language } from 'src/languages/entities/language.entity';
 import { FilesModule } from 'src/files/files.module';
 import { Event } from './entities/event.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { Event } from './entities/event.entity';
       Language,
     ]),
     FilesModule,
+    JwtModule
   ],
   controllers: [EventController],
   providers: [EventService],

@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { SeatTypeService } from './seat_type.service';
 import { CreateSeatTypeDto } from './dto/create-seat_type.dto';
 import { UpdateSeatTypeDto } from './dto/update-seat_type.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SeatType } from './entities/seat_type.entity';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
 
 @ApiTags('Seat Type')
 @Controller('seat-type')
@@ -13,6 +14,7 @@ export class SeatTypeController {
 
   @ApiOperation({ summary: 'SeatType name' })
   @ApiResponse({ status: 200, type: SeatType })
+  @UseGuards(JwtAdminGuard)
   @Post()
   create(@Body() createSeatTypeDto: CreateSeatTypeDto) {
     return this.seatTypeService.create(createSeatTypeDto);
@@ -34,6 +36,7 @@ export class SeatTypeController {
 
   @ApiOperation({ summary: 'Updadate seat type' })
   @ApiResponse({ status: 200, type: SeatType })
+  @UseGuards(JwtAdminGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSeatTypeDto: UpdateSeatTypeDto) {
     return this.seatTypeService.update(+id, updateSeatTypeDto);
@@ -41,6 +44,7 @@ export class SeatTypeController {
 
   @ApiOperation({ summary: 'remove seat type' })
   @ApiResponse({ status: 200, type: SeatType })
+  @UseGuards(JwtAdminGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.seatTypeService.remove(+id);

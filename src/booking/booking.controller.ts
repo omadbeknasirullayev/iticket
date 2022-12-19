@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 import { BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
@@ -12,6 +13,7 @@ export class BookingController {
 
   @ApiOperation({ summary: 'Booking name' })
   @ApiResponse({ status: 200, type: Booking })
+  @UseGuards(JwtAdminCustomerGuard)
   @Post()
   create(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingService.create(createBookingDto);
@@ -19,6 +21,7 @@ export class BookingController {
 
   @ApiOperation({ summary: 'Find all bookings' })
   @ApiResponse({ status: 200, type: [Booking] })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get()
   findAll() {
     return this.bookingService.findAll();
@@ -26,6 +29,7 @@ export class BookingController {
 
   @ApiOperation({ summary: 'Find One booking' })
   @ApiResponse({ status: 200, type: Booking })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.bookingService.findOne(+id);
@@ -33,6 +37,7 @@ export class BookingController {
 
   @ApiOperation({ summary: 'Updadate booking' })
   @ApiResponse({ status: 200, type: Booking })
+  @UseGuards(JwtAdminCustomerGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
     return this.bookingService.update(+id, updateBookingDto);
@@ -40,6 +45,7 @@ export class BookingController {
 
   @ApiOperation({ summary: 'remove booking' })
   @ApiResponse({ status: 200, type: Booking })
+  @UseGuards(JwtAdminCustomerGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bookingService.remove(+id);

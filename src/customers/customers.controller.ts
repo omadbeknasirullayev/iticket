@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiPayloadTooLargeResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -19,6 +21,7 @@ export class CustomersController {
 
   @ApiOperation({summary: 'Find all customers'})
   @ApiResponse({status: 200, type: [Customer]})
+  @UseGuards(JwtAdminGuard)
   @Get()
   findAll() {
     return this.customersService.findAll();
@@ -26,6 +29,7 @@ export class CustomersController {
 
   @ApiOperation({summary: 'Find one customer'})
   @ApiResponse({status: 200, type: Customer})
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.customersService.findOne(+id);
@@ -33,6 +37,7 @@ export class CustomersController {
 
   @ApiOperation({summary: 'Update customers'})
   @ApiResponse({status: 200, type: Customer})
+  @UseGuards(JwtAdminCustomerGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
     return this.customersService.update(+id, updateCustomerDto);
@@ -40,6 +45,7 @@ export class CustomersController {
 
   @ApiOperation({summary: 'Remove customers'})
   @ApiResponse({status: 200, type: Customer})
+  @UseGuards(JwtAdminCustomerGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.customersService.remove(+id);

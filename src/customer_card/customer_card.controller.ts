@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 import { CustomerCardService } from './customer_card.service';
 import { CreateCustomerCardDto } from './dto/create-customer_card.dto';
 import { UpdateCustomerCardDto } from './dto/update-customer_card.dto';
@@ -11,6 +12,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'CustomerCard name' })
   @ApiResponse({ status: 200, type: CustomerCard })
+  @UseGuards(JwtAdminCustomerGuard)
   @Post()
   create(@Body() createCustomerCardDto: CreateCustomerCardDto) {
     return this.customerCardService.create(createCustomerCardDto);
@@ -18,6 +20,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'Select the main card' })
   @ApiResponse({ status: 200,})
+  @UseGuards(JwtAdminCustomerGuard)
   @Post('ismain/:id')
   isMain(@Param('id') id: string, @Body() customer: any) {
     return this.customerCardService.isMain(+id, customer.customer_id)
@@ -25,6 +28,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: "Activated customer's card" })
   @ApiResponse({ status: 200, })
+  @UseGuards(JwtAdminCustomerGuard)
   @Post('/activate/:id')
   activate(@Param('id') id: string) {
     return this.customerCardService.activate(+id)
@@ -32,6 +36,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'Find all customer cards' })
   @ApiResponse({ status: 200, type: [CustomerCard] })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get()
   findAll() {
     return this.customerCardService.findAll();
@@ -39,6 +44,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'Find One customer card' })
   @ApiResponse({ status: 200, type: CustomerCard })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.customerCardService.findOne(+id);
@@ -46,6 +52,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'Updadate customer card' })
   @ApiResponse({ status: 200, type: CustomerCard })
+  @UseGuards(JwtAdminCustomerGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCustomerCardDto: UpdateCustomerCardDto) {
     return this.customerCardService.update(+id, updateCustomerCardDto);
@@ -53,6 +60,7 @@ export class CustomerCardController {
 
   @ApiOperation({ summary: 'remove customer card' })
   @ApiResponse({ status: 200, type: CustomerCard })
+  @UseGuards(JwtAdminCustomerGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.customerCardService.remove(+id);

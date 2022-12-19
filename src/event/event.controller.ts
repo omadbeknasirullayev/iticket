@@ -8,6 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -15,6 +16,8 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Event } from './entities/event.entity';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
+import { JwtAdminCustomerGuard } from 'src/guards/jwtAdminystomerGuard.guard';
 
 @ApiTags('Event')
 @Controller('event')
@@ -23,6 +26,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'Event name' })
   @ApiResponse({ status: 200, type: Event })
+  @UseGuards(JwtAdminGuard)
   @Post()
   @UseInterceptors(FileInterceptor('photo'))
   create(@Body() createEventDto: CreateEventDto, @UploadedFile() photo) {
@@ -31,6 +35,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'Find all events' })
   @ApiResponse({ status: 200, type: [Event] })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get()
   findAll() {
     return this.eventService.findAll();
@@ -38,6 +43,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'Find One event' })
   @ApiResponse({ status: 200, type: Event })
+  @UseGuards(JwtAdminCustomerGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.eventService.findOne(+id);
@@ -45,6 +51,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'Updadate event' })
   @ApiResponse({ status: 200, type: Event })
+  @UseGuards(JwtAdminGuard)
   @Patch(':id')
   @UseInterceptors(FileInterceptor('photo'))
   update(
@@ -57,6 +64,7 @@ export class EventController {
 
   @ApiOperation({ summary: 'remove event' })
   @ApiResponse({ status: 200, type: Event })
+  @UseGuards(JwtAdminGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.eventService.remove(+id);

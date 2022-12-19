@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAdminGuard } from 'src/guards/admin.guard';
 import { DiscountCuponService } from './discount_cupon.service';
 import { CreateDiscountCuponDto } from './dto/create-discount_cupon.dto';
 import { UpdateDiscountCuponDto } from './dto/update-discount_cupon.dto';
@@ -13,6 +14,7 @@ export class DiscountCuponController {
 
   @ApiOperation({ summary: 'DiscountCupon name' })
   @ApiResponse({ status: 200, type: DiscountCupon })
+  @UseGuards(JwtAdminGuard)
   @Post()
   create(@Body() createDiscountCuponDto: CreateDiscountCuponDto) {
     return this.discountCuponService.create(createDiscountCuponDto);
@@ -20,6 +22,7 @@ export class DiscountCuponController {
 
   @ApiOperation({ summary: 'Find all discount cupons' })
   @ApiResponse({ status: 200, type: [DiscountCupon] })
+  @UseGuards(JwtAdminGuard)
   @Get()
   findAll() {
     return this.discountCuponService.findAll();
@@ -27,6 +30,7 @@ export class DiscountCuponController {
 
   @ApiOperation({ summary: 'Find One discount cupon' })
   @ApiResponse({ status: 200, type: DiscountCupon })
+  @UseGuards(JwtAdminGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.discountCuponService.findOne(+id);
@@ -34,6 +38,7 @@ export class DiscountCuponController {
 
   @ApiOperation({ summary: 'Updadate discount cupon' })
   @ApiResponse({ status: 200, type: DiscountCupon })
+  @UseGuards(JwtAdminGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDiscountCuponDto: UpdateDiscountCuponDto) {
     return this.discountCuponService.update(+id, updateDiscountCuponDto);
@@ -41,6 +46,7 @@ export class DiscountCuponController {
 
   @ApiOperation({ summary: 'remove discount cupon' })
   @ApiResponse({ status: 200, type: DiscountCupon })
+  @UseGuards(JwtAdminGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.discountCuponService.remove(+id);
